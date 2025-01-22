@@ -105,6 +105,34 @@ const lineTracing = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
         </block>
+        <block type="line_tracing_mode_ghost" id="line_tracing_mode_ghost">
+            <value name="mode">
+                <shadow type="line_tracing_mode_menu">
+                </shadow>
+            </value>
+        </block>
+        <block type="line_tracing_mode_direction" id="line_tracing_mode_direction">
+            <value name="mode">
+                <shadow type="line_tracing_mode_menu">
+                </shadow>
+            </value>
+            <value name="direction">
+                <shadow type="line_tracing_direction_menu">
+                </shadow>
+            </value>
+        </block>
+        <block type="line_tracing_pick_direction" id="line_tracing_pick_direction">
+            <value name="direction">
+                <shadow type="line_tracing_direction_menu_2">
+                </shadow>
+            </value>
+        </block>
+         <block type="line_tracing_speed" id="line_tracing_speed">
+            <value name="speed">
+                <shadow type="line_tracing_speed_menu">
+                </shadow>
+            </value>
+        </block>
     </category>
     `;
 };
