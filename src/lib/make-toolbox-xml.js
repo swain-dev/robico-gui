@@ -139,6 +139,42 @@ const lineTracing = function (isInitialSetup, isStage, targetId, colors) {
 
 //
 
+// light
+
+const light = function (isInitialSetup, isStage, targetId, colors) {
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
+    return `
+    <category name="%{BKY_CATEGORY_LIGHT}" id="light" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
+        <block type="light_turnon_direction_color" id="light_turnon_direction_color">
+            <value name="direction">
+                <shadow type="light_turnon_direction_menu">
+                </shadow>
+            </value>
+            <value name="color">
+                <shadow type="light_turnon_color_menu">
+                </shadow>
+            </value>
+        </block>
+        <block type="light_turnon_floor_lights" id="light_turnon_floor_lights">
+        </block>
+        <block type="light_turnoff_direction_lights" id="light_turnoff_direction_lights">
+            <value name="direction">
+                <shadow type="light_turnon_direction_menu">
+                </shadow>
+            </value>
+        </block>
+         <block type="light_turnon_type_lights" id="light_turnon_type_lights">
+            <value name="type">
+                <shadow type="light_type_menu">
+                </shadow>
+            </value>
+        </block>
+    </category>
+    `;
+};
+
+//
+
 const xmlEscape = function (unsafe) {
     return unsafe.replace(/[<>&'"]/g, c => {
         switch (c) {
@@ -557,6 +593,7 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     };
     const motionXML = moveCategory('motion') || motion(isInitialSetup, isStage, targetId, colors.motion);
     const lineTracingXML = moveCategory('lineTracing') || lineTracing(isInitialSetup, isStage, targetId, colors.motion);
+    const lightXML = moveCategory('light') || light(isInitialSetup, isStage, targetId, colors.light);
     const looksXML = moveCategory('looks') ||
         looks(isInitialSetup, isStage, targetId, costumeName, backdropName, colors.looks);
     const soundXML = moveCategory('sound') || sound(isInitialSetup, isStage, targetId, soundName, colors.sounds);
@@ -569,6 +606,7 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         eventsXML, gap,
         motionXML, gap,
         lineTracingXML, gap,
+        lightXML, gap,
         looksXML, gap,
         soundXML, gap,
         controlXML, gap,
