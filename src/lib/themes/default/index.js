@@ -1,51 +1,45 @@
 const blockColors = {
-    motion: {
-        primary: '#4C97FF',
-        secondary: '#4280D7',
-        tertiary: '#3373CC',
-        quaternary: '#3373CC'
+    event: {
+        primary: '#F4B819',
+        secondary: '#DDAC14',
+        tertiary: '#D39900',
+        quaternary: '#D39900'
     },
-    looks: {
-        primary: '#9966FF',
-        secondary: '#855CD6',
-        tertiary: '#774DCB',
-        quaternary: '#774DCB'
+    motion: {
+        primary: '#5596F0',
+        secondary: '#5082F0',
+        tertiary: '#2D64F0',
+        quaternary: '#2D64F0'
+    },
+    line_tracing: {
+        primary: '#FF9FBD',
+        secondary: '#FB7D9D',
+        tertiary: '#D66A8B',
+        quaternary: '#D66A8B'
+    },
+    light: {
+        primary: '#95D13F',
+        secondary: '#7DBF32',
+        tertiary: '#6A9E31',
+        quaternary: '#6A9E31'
     },
     sounds: {
-        primary: '#CF63CF',
-        secondary: '#C94FC9',
-        tertiary: '#BD42BD',
-        quaternary: '#BD42BD'
+        primary: '#A4A4FF',
+        secondary: '#8282E1',
+        tertiary: '#7673BD',
+        quaternary: '#7673BD'
     },
-    control: {
-        primary: '#FFAB19',
-        secondary: '#EC9C13',
-        tertiary: '#CF8B17',
-        quaternary: '#CF8B17'
+    fun_move: {
+        primary: '#A0C8FF',
+        secondary: '#82AAE1',
+        tertiary: '#799BBB',
+        quaternary: '#799BBB'
     },
-    event: {
-        primary: '#FFBF00',
-        secondary: '#E6AC00',
-        tertiary: '#CC9900',
-        quaternary: '#CC9900'
-    },
-    sensing: {
-        primary: '#5CB1D6',
-        secondary: '#47A8D1',
-        tertiary: '#2E8EB8',
-        quaternary: '#2E8EB8'
-    },
-    pen: {
-        primary: '#0fBD8C',
-        secondary: '#0DA57A',
-        tertiary: '#0B8E69',
-        quaternary: '#0B8E69'
-    },
-    operators: {
-        primary: '#59C059',
-        secondary: '#46B946',
-        tertiary: '#389438',
-        quaternary: '#389438'
+    sensor: {
+        primary: '#46C8FF',
+        secondary: '#00B2E3',
+        tertiary: '#0095BE',
+        quaternary: '#0095BE'
     },
     data: {
         primary: '#FF8C1A',
