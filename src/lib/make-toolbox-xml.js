@@ -27,9 +27,6 @@ const motion = function (isInitialSetup, isStage, targetId, colors) {
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
     <category name="%{BKY_CATEGORY_MOTION}" id="motion" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
-        ${isStage ? `
-        <label text="${stageSelected}"></label>
-        ` : `
         <block type="motion_moveway" id="motion_moveway">
             <value name="way">
                 <shadow type="motion_way_menu">
@@ -99,7 +96,7 @@ const motion = function (isInitialSetup, isStage, targetId, colors) {
             </value>
         </block>
         <block type="motion_stop_wheels" id="motion_stop_wheels">
-        </block>`}
+        </block>
         ${categorySeparator}
     </category>
     `;
@@ -299,38 +296,269 @@ const events = function (isInitialSetup, isStage, targetId, colors) {
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
     <category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
-        <block type="event_whenflagclicked"/>
+        <block type="event_start_click"/>
         <block type="event_whenkeypressed">
         </block>
-        ${isStage ? `
-            <block type="event_whenstageclicked"/>
-        ` : `
-            <block type="event_whenthisspriteclicked"/>
-        `}
-        <block type="event_whenbackdropswitchesto">
+    </category>
+    `;
+};
+
+const control = function (isInitialSetup, isStage, targetId, isRealtimeMode) {
+    return `
+    <category name="%{BKY_CATEGORY_CONTROL}" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
+        <block type="control_wait">
+            <value name="DURATION">
+                <shadow type="math_positive_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
         </block>
         ${blockSeparator}
-        <block type="event_whengreaterthan">
-            <value name="VALUE">
+        <block type="control_repeat">
+            <value name="TIMES">
+                <shadow type="math_whole_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block id="forever" type="control_forever"/>
+        ${blockSeparator}
+        <block type="control_if"/>
+        <block type="control_if_else"/>
+        <block id="wait_until" type="control_wait_until"/>
+        <block id="repeat_until" type="control_repeat_until"/>
+        ${blockSeparator}
+        ${isRealtimeMode ? `
+            <block type="control_stop"/>
+            ${blockSeparator}
+            ${isStage ? `
+                <block type="control_create_clone_of">
+                    <value name="CLONE_OPTION">
+                        <shadow type="control_create_clone_of_menu"/>
+                    </value>
+                </block>
+            ` : `
+                <block type="control_start_as_clone"/>
+                <block type="control_create_clone_of">
+                    <value name="CLONE_OPTION">
+                        <shadow type="control_create_clone_of_menu"/>
+                    </value>
+                </block>
+                <block type="control_delete_this_clone"/>
+            `}
+            ${categorySeparator}
+        ` : null}
+    </category>
+    `;
+};
+
+const operators = function (isInitialSetup) {
+    const apple = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_APPLE', 'apple');
+    const banana = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_BANANA', 'banana');
+    const letter = ScratchBlocks.ScratchMsgs.translate('OPERATORS_LETTEROF_APPLE', 'a');
+    return `
+    <category name="%{BKY_CATEGORY_OPERATORS}" id="operators" colour="#40BF4A" secondaryColour="#389438">
+        <block type="operator_add">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_subtract">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_multiply">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_divide">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="operator_random">
+            <value name="FROM">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
                 <shadow type="math_number">
                     <field name="NUM">10</field>
                 </shadow>
             </value>
         </block>
         ${blockSeparator}
-        <block type="event_whenbroadcastreceived">
-        </block>
-        <block type="event_broadcast">
-            <value name="BROADCAST_INPUT">
-                <shadow type="event_broadcast_menu"></shadow>
+        <block type="operator_gt">
+            <value name="OPERAND1">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+            <value name="OPERAND2">
+                <shadow type="text">
+                    <field name="TEXT">50</field>
+                </shadow>
             </value>
         </block>
-        <block type="event_broadcastandwait">
-            <value name="BROADCAST_INPUT">
-              <shadow type="event_broadcast_menu"></shadow>
+        <block type="operator_lt">
+            <value name="OPERAND1">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+            <value name="OPERAND2">
+                <shadow type="text">
+                    <field name="TEXT">50</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_equals">
+            <value name="OPERAND1">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+            <value name="OPERAND2">
+                <shadow type="text">
+                    <field name="TEXT">50</field>
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="operator_and"/>
+        <block type="operator_or"/>
+        <block type="operator_not"/>
+        ${blockSeparator}
+        ${isInitialSetup ? '' : `
+            <block type="operator_join">
+                <value name="STRING1">
+                    <shadow type="text">
+                        <field name="TEXT">${apple}</field>
+                    </shadow>
+                </value>
+                <value name="STRING2">
+                    <shadow type="text">
+                        <field name="TEXT">${banana}</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="operator_letter_of">
+                <value name="LETTER">
+                    <shadow type="math_whole_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+                <value name="STRING">
+                    <shadow type="text">
+                        <field name="TEXT">${apple}</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="operator_length">
+                <value name="STRING">
+                    <shadow type="text">
+                        <field name="TEXT">${apple}</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="operator_contains" id="operator_contains">
+              <value name="STRING1">
+                <shadow type="text">
+                  <field name="TEXT">${apple}</field>
+                </shadow>
+              </value>
+              <value name="STRING2">
+                <shadow type="text">
+                  <field name="TEXT">${letter}</field>
+                </shadow>
+              </value>
+            </block>
+        `}
+        ${blockSeparator}
+        <block type="operator_mod">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_round">
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="operator_mathop">
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
             </value>
         </block>
         ${categorySeparator}
+    </category>
+    `;
+};
+
+const variables = function () {
+    return `
+    <category
+        name="%{BKY_CATEGORY_VARIABLES}"
+        id="variables"
+        colour="#FF8C1A"
+        secondaryColour="#DB6E00"
+        custom="VARIABLE">
+    </category>
+    `;
+};
+
+const myBlocks = function () {
+    return `
+    <category
+        name="%{BKY_CATEGORY_MYBLOCKS}"
+        id="myBlocks"
+        colour="#FF6680"
+        secondaryColour="#FF4D6A"
+        custom="PROCEDURE">
     </category>
     `;
 };
@@ -348,6 +576,7 @@ const xmlClose = '</xml>';
  * and other extensions: core extensions will be placed in the normal Scratch order; others will go at the bottom.
  * @property {string} id - the extension / category ID.
  * @property {string} xml - the `<category>...</category>` XML for this extension / category.
+ * @param {?boolean} isRealtimeMode - Current program mode.
  * @param {?string} costumeName - The name of the default selected costume dropdown.
  * @param {?string} backdropName - The name of the default selected backdrop dropdown.
  * @param {?string} soundName -  The name of the default selected sound dropdown.
@@ -355,6 +584,7 @@ const xmlClose = '</xml>';
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
 const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categoriesXML = [],
+    isRealtimeMode = true,
     costumeName = '', backdropName = '', soundName = '', colors = defaultColors) {
     isStage = isInitialSetup || isStage;
     const gap = [categorySeparator];
@@ -380,6 +610,10 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const eventsXML = moveCategory('event') || events(isInitialSetup, isStage, targetId, colors.event);
     const funMoveXML = moveCategory('funMove') || funMove(isInitialSetup, isStage, targetId, colors.fun_move);
     const sensorXML = moveCategory('sensor') || sensor(isInitialSetup, isStage, targetId, colors.sensor);
+    const controlXML = moveCategory('control') || control(isInitialSetup, isStage, targetId, isRealtimeMode);
+    const operatorsXML = moveCategory('operators') || operators(isInitialSetup, isStage, targetId);
+    const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId);
+    const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId);
 
     const everything = [
         xmlOpen,
@@ -389,7 +623,11 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         lightXML, gap,
         soundXML, gap,
         funMoveXML, gap,
-        sensorXML, gap
+        sensorXML, gap,
+        controlXML, gap,
+        operatorsXML, gap,
+        variablesXML, gap,
+        myBlocksXML
     ];
 
     for (const extensionCategory of categoriesXML) {

@@ -55,6 +55,18 @@ const blockColors = {
         tertiary: '#E64D00',
         quaternary: '#E64D00'
     },
+    operators: {
+        primary: '#59C059',
+        secondary: '#46B946',
+        tertiary: '#389438',
+        quaternary: '#389438'
+    },
+    control: {
+        primary: '#FFAB19',
+        secondary: '#EC9C13',
+        tertiary: '#CF8B17',
+        quaternary: '#CF8B17'
+    },
     more: {
         primary: '#FF6680',
         secondary: '#FF4D6A',

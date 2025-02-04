@@ -157,7 +157,8 @@ class MenuBar extends React.Component {
             'handleKeyPress',
             'handleRestoreOption',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'runBlocks'
         ]);
     }
     componentDidMount () {
@@ -346,6 +347,14 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseAbout();
         };
     }
+    runBlocks () {
+        for (const target of this.props.vm.runtime.targets) {
+            for (const blockId in target.blocks._blocks) {
+                const block = target.blocks._blocks[blockId];
+                console.log(JSON.stringify(block, null, 2));
+            }
+        }
+    }
     render () {
         const saveNowMessage = (
             <FormattedMessage
@@ -480,6 +489,12 @@ class MenuBar extends React.Component {
                     </div>
                 </div>
                 {aboutButton}
+                <div
+                    className={classNames(styles.startControl)}
+                    onClick={this.runBlocks}
+                >
+                    { 'Start' }
+                </div>
             </Box>
         );
     }
