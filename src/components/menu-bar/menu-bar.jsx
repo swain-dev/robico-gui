@@ -348,12 +348,14 @@ class MenuBar extends React.Component {
         };
     }
     runBlocks () {
-        for (const target of this.props.vm.runtime.targets) {
-            for (const blockId in target.blocks._blocks) {
-                const block = target.blocks._blocks[blockId];
-                console.log(JSON.stringify(block, null, 2));
-            }
-        }
+        const vm = this.props.vm; // Đảm bảo vm được truyền vào
+        if (!vm) return;
+
+        vm.start(); // Chạy các block
+
+        // Lấy giá trị từ runtime storage
+        const output = vm.runtime._customStorage?.motionMovewayOutput;
+        console.log('Giá trị từ block:', output); // '1212121'
     }
     render () {
         const saveNowMessage = (
